@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+
+using namespace std;
+
+void sortuj(int *T, int n)
+{
+    int pom, j;
+     for(int i=0; i<n; i++){
+        pom = T[i];
+        for (j=i-1; j>=0 && T[j]>pom; j--)
+            T[j+1] = T[j];
+        T[j+1]=pom;
+     }
+}
+
+
+int main()
+{
+    int n;
+    cout<<"Podaj wielkosc tablicy: ";
+    cin>>n;
+    int *T = new int[n];
+
+    srand(time(NULL));
+
+    for(int i=0; i<n; i++)
+        T[i]=rand()%31;
+
+    cout<<"PRZED SORTOWANIEM"<<endl;
+    for(int i=0; i<n; i++)
+        cout<<setw(4)<<T[i];
+
+    sortuj(T,n);
+
+    cout<<endl<<"PO SORTOWANIU"<<endl;
+    for(int i=0; i<n; i++)
+        cout<<setw(4)<<T[i];
+
+    delete []T;
+
+    return 0;
+}
