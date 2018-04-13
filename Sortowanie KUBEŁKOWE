@@ -1,0 +1,48 @@
+#include<iostream>
+#include<iomanip>
+
+
+using namespace std;
+
+
+void quick_sort(int *T, int lewy, int prawy)
+{
+	int i = lewy, j = prawy, pivot = T[(lewy+prawy)/2];
+
+	do{
+		while(T[i]<pivot)
+            i++;
+		while(T[j]>pivot)
+            j--;
+
+		if (i<=j){
+			swap(T[i],T[j]);
+			i++;
+			j--;
+		}
+	}while (i<=j);
+
+	if(j > lewy)
+        quick_sort(T, lewy, j);
+	if(i < prawy)
+        quick_sort(T, i, prawy);
+}
+
+int main()
+{
+	int n;
+  	cout << "Podaj dlugosc ciagu do posortowania: "; cin >> n;
+  	int *T = new int[n];
+
+  	for(int i=0;i<n;i++){
+        cout<<"Podaj "<<i+1<<". liczbe: ";
+        cin>>T[i];
+    }
+
+  	quick_sort(T,0, n-1);
+
+  	for(int i=0;i<n;i++)
+        cout<<setw(4)<<T[i];
+
+  	return 0;
+}
